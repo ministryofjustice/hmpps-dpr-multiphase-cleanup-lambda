@@ -14,7 +14,7 @@ configurations {
 
 dependencies {
   implementation("com.amazonaws:aws-lambda-java-core:1.2.3")
-  implementation("software.amazon.awssdk:redshiftdata:2.29.20")
+  implementation("software.amazon.awssdk:redshiftdata:2.31.66")
 
   //test
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.1")
