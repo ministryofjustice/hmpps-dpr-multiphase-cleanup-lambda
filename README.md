@@ -4,7 +4,7 @@
 
 A Lambda function to remove expired records from the Redshift table which manages the multiphase query states.
 It deletes all records older than the EXPIRY_TIME environment variable value or if that is not set, 7 days by default.
-This runs on an EventBridge schedule.
+This runs daily on an EventBridge schedule.
 
 #### The required environment variables needed to be set are:
 - REDSHIFT_CLUSTER_ID
