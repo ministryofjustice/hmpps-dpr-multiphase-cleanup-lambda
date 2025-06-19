@@ -13,7 +13,7 @@ configurations {
 }
 
 dependencies {
-  implementation("com.amazonaws:aws-lambda-java-core:1.2.3")
+  implementation("com.amazonaws:aws-lambda-java-core:1.3.0")
   implementation("software.amazon.awssdk:redshiftdata:2.29.20")
 
   //test
