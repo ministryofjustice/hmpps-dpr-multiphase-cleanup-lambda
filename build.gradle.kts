@@ -17,9 +17,9 @@ dependencies {
   implementation("software.amazon.awssdk:redshiftdata:2.29.20")
 
   //test
-  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.1")
-  testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.1")
-  testImplementation("org.junit.jupiter:junit-jupiter-params:5.10.1")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.13.1")
+  testImplementation("org.junit.jupiter:junit-jupiter-api:5.13.1")
+  testImplementation("org.junit.jupiter:junit-jupiter-params:5.13.1")
   testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
   testImplementation("org.mockito:mockito-core:5.18.0")
 }
