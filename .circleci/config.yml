@@ -1,0 +1,53 @@
+version: 2.1
+
+orbs:
+  reporting: ministryofjustice/hmpps-reporting@1.0.64
+  slack: circleci/slack@4.12.5
+
+workflows:
+  checkout-build-publish:
+    jobs:
+      - reporting/gradle_owasp_check:
+          notify_slack: false
+          context:
+            - hmpps-reporting-common
+            - hmpps-reporting-orb
+      - reporting/gradle_build_publish:
+          tag: "21.0"
+          app: hmpps-dpr-multiphase-cleanup-lambda
+          app_artifacts_directory: build/libs/
+          bucket_prefix: dpr-artifact-store
+          sync_args: "--exclude '*' --include '*-all*jar'"
+          deploy_to_test: true # Deploy to Test Environment
+          refresh_lambda: false
+          refresh_function: dpr-multiphase-cleanup-function
+          notify_jira: true
+          notify_slack: true
+          channel: dpr_cicd_alerts
+          command: clean jar shadowJar --refresh-dependencies # Skip tests when building jar, they've already run
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              ignore: /.*/
+          ref: << pipeline.git.branch >><< pipeline.git.tag >>
+          context:
+            - hmpps-reporting-common
+            - hmpps-reporting-orb
+          deps_checksum_file: build.gradle.kts
+
+  owasp-security:
+    triggers:
+      - schedule:
+          cron: "30 6 * * *" ## Runs every day at 6.30 AM UTC
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - reporting/gradle_owasp_check:
+          notify_slack: true
+          channel: dpr_cicd_alerts
+          context:
+            - hmpps-reporting-common
+            - hmpps-reporting-orb
