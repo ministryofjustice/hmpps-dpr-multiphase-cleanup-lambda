@@ -44,15 +44,14 @@ class MultiphaseCleanUpServiceTest {
     @ParameterizedTest
     @ValueSource(strings = ["FAILED", "ABORTED"])
     fun `cleanUp should be retried up to 2 times if the query does not succeed`(status: String) {
+        val executionStatus = ExecutionStatus(StatusString.fromValue(status), 0)
+        whenever(redshiftRepository.cleanUp(any())).thenReturn(executionStatus)
+
         val exception = assertThrows<CleanUpFailedException> {
-            val executionStatus = ExecutionStatus(StatusString.fromValue(status), 0)
-
-            whenever(redshiftRepository.cleanUp(any())).thenReturn(executionStatus)
-
             multiphaseCleanUpService.handleRequest(mutableMapOf(), context)
-
-            verify(redshiftRepository, times(3)).cleanUp(logger)
         }
+
+        verify(redshiftRepository, times(3)).cleanUp(logger)
         assertEquals( "Failed to delete expired records after 3 attempts.", exception.message)
     }
 
