@@ -20,7 +20,7 @@ class MultiphaseCleanUpService(
         const val RETRY_TIMES_NAME = "RETRY_TIMES"
         const val RETRY_TIMES_VALUE = 2
         const val RETRY_DELAY_NAME = "RETRY_DELAY"
-        const val RETRY_DELAY_VALUE = 500L
+        const val RETRY_DELAY_VALUE = 1000L
     }
 
     override fun handleRequest(payload: MutableMap<String, Any>, context: Context?): String {

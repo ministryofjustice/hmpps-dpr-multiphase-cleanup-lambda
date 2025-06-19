@@ -13,8 +13,8 @@ class RedshiftRepository(
     private val env: Env
 ) {
     companion object {
-        const val REDSHIFT_CLUSTER_ID_NAME = "CLUSTER_ID"
-        const val REDSHIFT_CREDENTIAL_SECRET_ARN_NAME = "CREDENTIAL_SECRET_ARN"
+        const val REDSHIFT_CLUSTER_ID_NAME = "REDSHIFT_CLUSTER_ID"
+        const val REDSHIFT_CREDENTIAL_SECRET_ARN_NAME = "REDSHIFT_CREDENTIAL_SECRET_ARN"
         const val REDSHIFT_STATUS_POLLING_WAIT_MS_NAME = "REDSHIFT_STATUS_POLLING_WAIT_MS"
         const val REDSHIFT_STATUS_POLLING_WAIT_MS_VALUE = 500L
         const val DB_NAME = "DB_NAME"
