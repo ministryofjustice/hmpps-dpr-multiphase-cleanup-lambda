@@ -48,6 +48,3 @@ workflows:
       - reporting/gradle_owasp_check:
           notify_slack: true
           channel: dpr_cicd_alerts
-          context:
-            - hmpps-reporting-common
-            - hmpps-reporting-orb
